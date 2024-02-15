@@ -1,0 +1,25 @@
+How to configure a django project with docker and docker-compose
+1 Create a new virtual python environment
+(python3 -m venv .venv)
+2 Activate the virtual environment
+(source .venv/bin/activate)
+3 Install python packages
+(pip install django, gunicorn)
+4 Create a new django project
+(django-admin startproject myproject)
+5 modify ./Dockerfile
+(change line 9: COPY . /"insertFolder" /app)
+6 modify .env
+(Change secret key, debug, and superuser)
+7 modify project/settings.py
+(line 13: to "import os")
+(line 16: to "BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))")
+(line 23: add secret key to .env and replace to "SECRET_KEY = os.getenv('SECRET_KEY')")
+(line 26: to "DEBUG = os.getenv('DEBUG')")
+(line 28: to "ALLOWED_HOSTS = ['*']")
+(line 79: to "'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),")
+(line 118: to "STATIC_URL = '/static/'")
+(line 119: to "STATIC_ROOT = '/static/'")
+8 modify entrypoint.sh
+(insert folder name in line 8)
+9 run docker-compose up --build
