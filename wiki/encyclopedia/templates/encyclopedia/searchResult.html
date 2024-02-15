@@ -1,0 +1,27 @@
+{% extends "encyclopedia/layout.html" %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block body %}
+    {% if isFound == True %}
+    	<p>{{ result|safe }}</p>
+        <form action="{% url 'edit' title=title %}">
+            <button class="btn btn-primary" type="submit">Edit this entry</button>
+        </form>
+    {% else %}
+        <div class="alert alert-warning d-flex align-items-center" role="alert">
+            <h1 class="alert-heading">No results found for {{ title }}</h1>
+        </div>
+        {% if relatedEntries %}
+            <h2>Did you mean?</h2>
+            <ul>
+                {% for entry in relatedEntries %}
+                    <li><a href="{% url 'searchResult' title=entry %}">{{ entry.title }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No related entries found</p>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}

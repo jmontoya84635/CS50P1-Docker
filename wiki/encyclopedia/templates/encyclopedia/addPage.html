@@ -1,0 +1,24 @@
+{% extends "encyclopedia/layout.html" %}
+{% block title %}
+    Add Page
+{% endblock %}
+{% block body %}
+    <h1>Create New Page</h1>
+    {% if alreadyExist %}
+        <div class="alert alert-danger" role="alert">
+            A page with this title already exists!
+        </div>
+    {% endif %}
+    <form action="{% url 'addPage' %}" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                <div>
+                    {{ field }}
+                </div>
+            </div>
+        {% endfor %}
+        <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+{% endblock %}
