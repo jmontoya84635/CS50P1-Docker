@@ -1,4 +1,6 @@
 How to configure a django project with docker and docker-compose
+0 Remove remote repository
+(git remote rm origin)
 1 Create a new virtual python environment
 (python3 -m venv .venv)
 2 Activate the virtual environment
