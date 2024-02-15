@@ -6,7 +6,7 @@ COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
 # TODO: replace with folder of your project
-COPY ./testproject /app
+COPY ./wiki /app
 
 WORKDIR /app
 
